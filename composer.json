@@ -1,0 +1,27 @@
+{
+    "name": "hnhdigital-os/laravel-helper-collection",
+    "description": "Provides class based helpers",
+    "keywords": ["laravel","helper","aws","human readable file size","timezone"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Rocco Howard",
+            "email": "rocco@hnh.digital"
+        }
+    ],
+    "require": {
+        "php": ">=7.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "6.*",
+        "symfony/process": "~2.3",
+        "codeclimate/php-test-reporter": "dev-master"
+    },
+    "autoload": {
+        "psr-4": {
+            "HnhDigital\\HelperCollection\\": "src/"
+        }
+    },
+    "prefer-stable": true,
+    "minimum-stability" : "dev"
+}
