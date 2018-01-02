@@ -1,12 +1,12 @@
 <?php
 
 namespace HnhDigital\HelperCollection;
-use \DateTime;
-use \DateTimeZone;
+
+use DateTime;
+use DateTimeZone;
 
 class Timezone
 {
-
     /**
      * Region name and mask.
      *
@@ -31,14 +31,14 @@ class Timezone
      */
     public static function data()
     {
-        $timezones  = [];
+        $timezones = [];
 
-        foreach (self::$regions as $name => $mask) {   
+        foreach (self::$regions as $name => $mask) {
             $zones = DateTimeZone::listIdentifiers($mask);
 
             foreach ($zones as $timezone) {
                 // Lets sample the time there right now
-                $time = new DateTime(NULL, new DateTimeZone($timezone));
+                $time = new DateTime(null, new DateTimeZone($timezone));
 
                 $offset = $time->getOffset() / 60 / 60;
                 $offset_whole = round($offset);
@@ -64,7 +64,7 @@ class Timezone
         $result = [];
 
         foreach ($data as $name => $zones) {
-            $result[] = ['BREAK', $name]; 
+            $result[] = ['BREAK', $name];
             foreach ($zones as $timezone => $zone) {
                 $result[] = [$timezone, $zone];
             }
