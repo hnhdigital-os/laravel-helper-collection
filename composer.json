@@ -1,6 +1,6 @@
 {
     "name": "hnhdigital-os/laravel-helper-collection",
-    "description": "Provides class based helpers",
+    "description": "Provides various classes of useful functionality.",
     "keywords": ["laravel","helper","aws","human readable file size","timezone"],
     "license": "MIT",
     "authors": [
