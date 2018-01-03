@@ -24,9 +24,9 @@ class Human
     /**
      * Convert bytes to a word.
      *
-     * @param  integer $bytes
-     * @param  integer $decimals
-     * @param  integer $mod
+     * @param int $bytes
+     * @param int $decimals
+     * @param int $mod
      *
      * @return string
      */
