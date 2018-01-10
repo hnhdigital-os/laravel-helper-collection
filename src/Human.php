@@ -30,7 +30,7 @@ class Human
      *
      * @return string
      */
-    public static function bytes($bytes, $decimals = 2, $mod = 1024)
+    public function bytes($bytes, $decimals = 2, $mod = 1024)
     {
         $factor = floor((strlen($bytes) - 1) / 3);
         $byte_name = static::$bytes_units[$factor];
