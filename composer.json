@@ -18,6 +18,9 @@
         "codeclimate/php-test-reporter": "dev-master"
     },
     "autoload": {
+        "files": [
+            "src/helpers.php"
+        ],
         "psr-4": {
             "HnhDigital\\HelperCollection\\": "src/"
         }
