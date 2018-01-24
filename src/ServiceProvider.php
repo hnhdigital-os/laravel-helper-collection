@@ -38,6 +38,14 @@ class ServiceProvider extends BaseServiceProvider
             return new Aws();
         });
 
+        $this->app->singleton('Database', function () {
+            return new Database();
+        });
+
+        $this->app->singleton('FileSystem', function () {
+            return new FileSystem();
+        });
+
         $this->app->singleton('Human', function () {
             return new Human();
         });
@@ -58,6 +66,6 @@ class ServiceProvider extends BaseServiceProvider
      */
     public function provides()
     {
-        return ['Aws', 'Human', 'SemVer', 'Timezone'];
+        return ['Aws', 'Database', 'Human', 'SemVer', 'Timezone'];
     }
 }
