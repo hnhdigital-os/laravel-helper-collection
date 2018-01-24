@@ -2,8 +2,8 @@
 
 namespace HnhDigital\HelperCollection;
 
-use DateTime;
 use DateTimeZone;
+use Carbon\Carbon;
 
 class Timezone
 {
@@ -15,6 +15,7 @@ class Timezone
     private static $regions = [
         'Africa'     => DateTimeZone::AFRICA,
         'America'    => DateTimeZone::AMERICA,
+        'Arctic'     => DateTimeZone::ARCTIC,
         'Antarctica' => DateTimeZone::ANTARCTICA,
         'Asia'       => DateTimeZone::ASIA,
         'Atlantic'   => DateTimeZone::ATLANTIC,
@@ -27,26 +28,48 @@ class Timezone
     /**
      * Returns a region grouped array.
      *
+     * @param array $config
+     *
      * @return array
      */
-    public static function data()
+    public static function data($config = [])
     {
-        $timezones = [];
-
-        foreach (self::$regions as $name => $mask) {
+        foreach (self::$regions as $region => $mask) {
             $zones = DateTimeZone::listIdentifiers($mask);
 
             foreach ($zones as $timezone) {
-                // Lets sample the time there right now
-                $time = new DateTime(null, new DateTimeZone($timezone));
+                
+                // Time at this timezone.
+                $time = Carbon::now($timezone);
 
-                $offset = $time->getOffset() / 60 / 60;
-                $offset_whole = round($offset);
-                $offset_decimal = abs($offset - $offset_whole) * 60;
-                $offset = (substr($offset, 0, 1) != '-' ? '+' : '').$offset_whole.':'.str_pad($offset_decimal, 2, '0', STR_PAD_LEFT);
+                // Convert timezone to human readable.
+                $offset = '('.app('Human')->timeOffset($time->offsetHours).')';
 
-                // Remove region name and add a sample time
-                $timezones[strtoupper($name)][$timezone] = sprintf('%s (%s) %s', strtoupper(substr($timezone, strlen($name) + 1)), $offset, $time->format('g:ia'));
+                // Default name.
+                $name = $timezone;
+
+                // Remove the region from the name.
+                if (array_get($config, 'remove-region', false)) {
+                    $name = substr($timezone, strlen($region) + 1);
+                }
+
+                // Remove the offset.
+                if (array_get($config, 'remove-offset', false)) {
+                    $offset = '';
+                }
+
+                // Show the time.
+                $current_time = '';
+                if (array_get($config, 'show-time', false)) {
+                    $current_time = $time->format(array_get($config, 'show-time-format', 'g:ia'));
+                }
+
+                // Place entry.
+                array_set($timezones, strtoupper($region).'.'.$timezone, sprintf('%s %s %s', 
+                    $name,
+                    $offset,
+                    $current_time
+                ));
             }
         }
 
@@ -56,15 +79,20 @@ class Timezone
     /**
      * Return a flat array.
      *
+     * @param array $config
+     *
      * @return array
      */
-    public static function optionsArray()
+    public static function optionsArray($config = [])
     {
-        $data = self::data();
+        $data = self::data($config);
+
         $result = [];
 
         foreach ($data as $name => $zones) {
-            $result[] = ['BREAK', $name];
+            if (array_get($config, 'include-region', false)) {
+                $result[] = [array_get($config, 'region-value', null), $name];
+            }
             foreach ($zones as $timezone => $zone) {
                 $result[] = [$timezone, $zone];
             }
