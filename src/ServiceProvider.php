@@ -66,6 +66,6 @@ class ServiceProvider extends BaseServiceProvider
      */
     public function provides()
     {
-        return ['Aws', 'Database', 'Human', 'SemVer', 'Timezone'];
+        return ['Aws', 'Database', 'FileSystem', 'Human', 'SemVer', 'Timezone'];
     }
 }
