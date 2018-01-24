@@ -9,7 +9,7 @@ class Aws
      *
      * @return array
      */
-    public static function client($override = [])
+    public function client($override = [])
     {
         return [
             'version'     => array_get($override, 'version', env('AWS_VERSION')),
