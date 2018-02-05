@@ -60,19 +60,58 @@ class Human
      * Convert seconds to words.
      *
      * @param integer $seconds
+     * @param array   $options
      *
      * @return string
      */
-    public function seconds($seconds)
+    public function seconds($seconds, $options = [])
     {
+        // Seconds.
         if ($seconds < 60) {
             $time = $seconds;
             $name = 'second';
-        } else {
+        }
+
+        // Minutes.
+        if ($seconds >= 60) {
             $time = round($seconds / 60, 0);
             $name = 'minute';
         }
 
-        return sprintf('%s %s', $time, str_plural($name, $time));
+        // Hours.
+        if ($time >= 60) {
+            $time = round($time / 60, 0);
+            $name = 'hour';
+        }
+
+        // Days.
+        if ($time >= 24) {
+            $time = round($time / 24, 0);
+            $name = 'day';
+        }
+
+        if (array_has($options, 'abbrev')) {
+            switch ($name) {
+                case 'second':
+                    $name = 'sec';
+                    break;
+                case 'minute':
+                    $name = 'min';
+                    break;
+            }
+        }
+
+        if (array_has($options, 'single')) {
+            $name = substr($name, 0, 1);
+        }
+
+        if ($time == 1) {
+            $time = '';
+            $period = $name;
+        } else {
+            $period = str_plural($name, $time);
+        }
+
+        return sprintf('%s %s', $time, $period);
     }
 }
