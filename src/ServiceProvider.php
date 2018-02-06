@@ -50,6 +50,10 @@ class ServiceProvider extends BaseServiceProvider
             return new Human();
         });
 
+        $this->app->singleton('LaravelModel', function () {
+            return new LaravelModel();
+        });
+
         $this->app->singleton('SemVer', function () {
             return new SemanticVersion();
         });
@@ -66,6 +70,6 @@ class ServiceProvider extends BaseServiceProvider
      */
     public function provides()
     {
-        return ['Aws', 'Database', 'FileSystem', 'Human', 'SemVer', 'Timezone'];
+        return ['Aws', 'Database', 'FileSystem', 'Human', 'LaravelModel', 'SemVer', 'Timezone'];
     }
 }
