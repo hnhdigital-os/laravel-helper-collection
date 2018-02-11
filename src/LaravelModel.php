@@ -66,29 +66,37 @@ class LaravelModel
      * @SuppressWarnings(PHPMD.LongVariable)
      * @SuppressWarnings(PHPMD.StaticAccess)
      */
-    public function modelJoin(&$primary_model, $relationships, $operator = '=', $type = 'left', $where = false)
+    public function modelJoin(&$query, &$primary_model, &$relationships, $operator = '=', $type = 'left', $where = false)
     {
+        if (is_string($relationships)) {
+            $relationships = [$relationships => []];
+        }
+
         if (!is_array($relationships)) {
             $relationships = [$relationships];
         }
 
-        if (empty($primary_model->query->columns)) {
-            $primary_model->query->selectRaw('DISTINCT '.$primary_model->model->getTable().'.*');
+        if (empty($query->columns)) {
+            $query->selectRaw('DISTINCT '.$primary_model->getTable().'.*');
         }
 
-        foreach ($relationships as $relation_name => $load_relationship) {
+        foreach ($relationships as $relation_name => &$relationship) {
+
+            if (empty($relationship)) {
+                $relationship = $this->getModelRelation($primary_model->$relation_name());
+            }
 
             // Required variables.
-            $model = array_get($primary_model->relationships, $relation_name.'.model');
-            $method = array_get($primary_model->relationships, $relation_name.'.method');
-            $table = array_get($primary_model->relationships, $relation_name.'.table');
-            $parent_key = array_get($primary_model->relationships, $relation_name.'.parent_key');
-            $foreign_key = array_get($primary_model->relationships, $relation_name.'.foreign_key');
+            $model = array_get($relationship, 'model');
+            $method = array_get($relationship, 'method');
+            $table = array_get($relationship, 'table');
+            $parent_key = array_get($relationship, 'parent_key');
+            $foreign_key = array_get($relationship, 'foreign_key');
 
             // Add the columns from the other table.
             // @todo do we need this?
             //$this->query->addSelect(new Expression("`$table`.*"));
-            $primary_model->query->join($table, $parent_key, $operator, $foreign_key, $type, $where);
+            $query->join($table, $parent_key, $operator, $foreign_key, $type, $where);
 
             // The join above is to the intimidatory table. This joins the query to the actual model.
             if ($method === 'BelongsToMany') {
@@ -96,12 +104,11 @@ class LaravelModel
                 $related_relation = $model->getRelated();
                 $related_table = $related_relation->getTable();
                 $related_qualified_key_name = $related_relation->getQualifiedKeyName();
-                $primary_model->query->join($related_table, $related_qualified_key_name, $operator, $related_foreign_key, $type, $where);
+                $query->join($related_table, $related_qualified_key_name, $operator, $related_foreign_key, $type, $where);
             }
         }
 
         // Group by the original model.
-        $primary_model->query->groupBy($primary_model->model->getQualifiedKeyName());
+        $query->groupBy($primary_model->getQualifiedKeyName());
     }
-
 }
