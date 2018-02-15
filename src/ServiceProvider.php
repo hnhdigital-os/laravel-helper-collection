@@ -1,5 +1,7 @@
 <?php
 
+namespace HnhDigital\HelperCollection;
+
 /*
  * This file is part of Laravel Navigation Builder.
  *
@@ -9,8 +11,7 @@
  * file that was distributed with this source code.
  */
 
-namespace HnhDigital\HelperCollection;
-
+use Blade;
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
 
 /**
@@ -25,7 +26,17 @@ class ServiceProvider extends BaseServiceProvider
      *
      * @var bool
      */
-    protected $defer = true;
+    protected $defer = false;
+
+    /**
+     * Bootstrap any application services.
+     *
+     * @return void
+     */
+    public function boot()
+    {
+        $this->registerBladeDirectives();
+    }
 
     /**
      * Register the service provider.
@@ -71,5 +82,46 @@ class ServiceProvider extends BaseServiceProvider
     public function provides()
     {
         return ['Aws', 'Database', 'FileSystem', 'Human', 'LaravelModel', 'SemVer', 'Timezone'];
+    }
+
+    /**
+     * Register blade directives.
+     *
+     * @return void
+     */
+    private function registerBladeDirectives()
+    {
+        blade::directive('capturestart', function () {
+            return '<?php ob_start(); ?>';
+        });
+
+        blade::directive('capturestop', function ($name) {
+            $name = str_replace('$', '', $name);
+            $name = substr($name, 1, -1);
+
+            return '<?php $'.$name.' = ob_get_clean(); ?>';
+        });
+
+        blade::directive('call', function ($call) {
+            $call = trim($call, "'");
+
+            return "<?php $call; ?>";
+        });
+
+        blade::directive('csrf', function () {
+            return '<?= csrf_field(); ?>';
+        });
+
+        blade::directive('raw', function ($raw) {
+            return "<?php $raw; ?>";
+        });
+
+        blade::directive('use', function ($use) {
+            return "<?php use $use; ?>";
+        });
+
+        blade::directive('plural', function ($text) {
+            return "<?= str_plural($text); ?>";
+        });
     }
 }
