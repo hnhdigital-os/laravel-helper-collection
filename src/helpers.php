@@ -9,7 +9,7 @@ if (! function_exists('array_dotize')) {
 }
 
 if (! function_exists('array_it')) {
-    function array_it($values, $check_values = false)
+    function array_it($values, $key = false)
     {
         $result = [];
 
@@ -19,8 +19,8 @@ if (! function_exists('array_it')) {
 
         foreach ($values as $value) {
             // Check given values. If any have eloquent models, convert to their key value.
-            if ($check_values && is_object($value) && $value instanceof \Illuminate\Database\Eloquent\Model) {
-                $result[] = $value->getKey();
+            if (!empty($key) && is_object($value) && $value instanceof \Illuminate\Database\Eloquent\Model) {
+                $result[] = $key === true ? $value->getKey() : $value->$key;
             } else {
                 $result[] = $value;
             }
