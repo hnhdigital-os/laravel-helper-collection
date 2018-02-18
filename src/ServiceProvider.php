@@ -96,14 +96,16 @@ class ServiceProvider extends BaseServiceProvider
         });
 
         blade::directive('capturestop', function ($name) {
-            $name = str_replace('$', '', $name);
-            $name = substr($name, 1, -1);
+            if (substr($name, 0, 1) == '$') {
+                $name = substr($text, 1);
+            }
+            $name = trim($name, "'\"");
 
             return '<?php $'.$name.' = ob_get_clean(); ?>';
         });
 
         blade::directive('call', function ($call) {
-            $call = trim($call, "'");
+            $name = trim($name, "'\"");
 
             return "<?php $call; ?>";
         });
@@ -120,8 +122,33 @@ class ServiceProvider extends BaseServiceProvider
             return "<?php use $use; ?>";
         });
 
-        blade::directive('plural', function ($text) {
-            return "<?= str_plural($text); ?>";
+        foreach (['__', 'camel_case', 'snake_case','studyly_case', 'str_plural', 'title_case'] as $function_name) {
+            blade::directive($function_name, function ($text) use ($function_name) {
+
+                $text = implode(',', array_map(function($value) {
+                    $value = trim($value, "'\" ");
+                    if (substr($value, 0, 1) !== '$') {
+                        $value = "'$value'";
+                    }
+                    return $value;
+                }, explode(',', $text)));
+
+                return "<?= $function_name($text); ?>";
+            });
+        }
+
+        blade::directive('str_upper', function ($text) use ($function_name) {
+            if (substr($text, 0, 1) !== '$') {
+                $text = "'$text'";
+            }
+            return "<?= strtoupper($text); ?>";
+        });
+
+        blade::directive('str_lower', function ($text) use ($function_name) {
+            if (substr($text, 0, 1) !== '$') {
+                $text = "'$text'";
+            }
+            return "<?= strtolower($text); ?>";
         });
     }
 }
