@@ -36,12 +36,26 @@ if (! function_exists('array_it')) {
 }
 
 /**
+ * Converts a DateTime to user's timezone.
+ */
+if (! function_exists('user_timezone')) {
+    function user_timezone($datetime = null)
+    {
+        if (is_null($datetime)) {
+            $datetime = Carbon\Carbon::now('UTC');
+        }
+
+        return Auth()->user()->timezone($datetime);
+    }
+}
+
+/**
  * Converts a DateTime to user's timezone and specified time/date format.
  */
 if (! function_exists('user_timedate')) {
     function user_timedate($datetime)
     {
-        return Auth()->user()->timezone($datetime)->format(Auth()->user()->time_date_format);
+        return user_timezone($datetime)->format(Auth()->user()->time_date_format);
     }
 }
 
@@ -51,7 +65,7 @@ if (! function_exists('user_timedate')) {
 if (! function_exists('user_time')) {
     function user_time($datetime)
     {
-        return Auth()->user()->timezone($datetime)->format(Auth()->user()->time_format);
+        return user_timezone($datetime)->format(Auth()->user()->time_format);
     }
 }
 
@@ -61,6 +75,6 @@ if (! function_exists('user_time')) {
 if (! function_exists('user_date')) {
     function user_date($datetime)
     {
-        return Auth()->user()->timezone($datetime)->format(Auth()->user()->date_format);
+        return user_timezone($datetime)->format(Auth()->user()->date_format);
     }
 }
