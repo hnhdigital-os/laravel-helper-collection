@@ -1,6 +1,8 @@
 <?php
 
-
+/**
+ * Converts a list of items into a dotted representation.
+ */
 if (! function_exists('array_dotize')) {
     function array_dotize(...$keys)
     {
@@ -8,6 +10,9 @@ if (! function_exists('array_dotize')) {
     }
 }
 
+/**
+ * Converts a string, an array of strings, or a collection into an array of values.
+ */
 if (! function_exists('array_it')) {
     function array_it($values, $key = false)
     {
@@ -27,5 +32,35 @@ if (! function_exists('array_it')) {
         }
 
         return $result;
+    }
+}
+
+/**
+ * Converts a DateTime to user's timezone and specified time/date format.
+ */
+if (! function_exists('user_timedate')) {
+    function user_timedate($datetime)
+    {
+        return Auth()->user()->timezone($datetime)->format(Auth()->user()->time_date_format);
+    }
+}
+
+/**
+ * Converts a DateTime to user's timezone and specified time format.
+ */
+if (! function_exists('user_time')) {
+    function user_time($datetime)
+    {
+        return Auth()->user()->timezone($datetime)->format(Auth()->user()->time_format);
+    }
+}
+
+/**
+ * Converts a DateTime to user's timezone and specified date format.
+ */
+if (! function_exists('user_date')) {
+    function user_date($datetime)
+    {
+        return Auth()->user()->timezone($datetime)->format(Auth()->user()->date_format);
     }
 }
