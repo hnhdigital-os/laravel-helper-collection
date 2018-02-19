@@ -91,10 +91,12 @@ class ServiceProvider extends BaseServiceProvider
      */
     private function registerBladeDirectives()
     {
+        // Start capturing.
         blade::directive('capturestart', function () {
             return '<?php ob_start(); ?>';
         });
 
+        // Stop capturing.
         blade::directive('capturestop', function ($name) {
             if (substr($name, 0, 1) == '$') {
                 $name = substr($text, 1);
@@ -104,25 +106,36 @@ class ServiceProvider extends BaseServiceProvider
             return '<?php $'.$name.' = ob_get_clean(); ?>';
         });
 
+        // Call.
         blade::directive('call', function ($call) {
             $name = trim($name, "'\"");
 
             return "<?php $call; ?>";
         });
 
+        // CSRF.
+        // @todo Remove when dropping L5.5 support.
         blade::directive('csrf', function () {
             return '<?= csrf_field(); ?>';
         });
 
+        // Single line of php
         blade::directive('raw', function ($raw) {
             return "<?php $raw; ?>";
         });
 
+        // Use.
         blade::directive('use', function ($use) {
             return "<?php use $use; ?>";
         });
 
-        foreach (['__', 'camel_case', 'snake_case','studyly_case', 'str_plural', 'title_case'] as $function_name) {
+        // Route.
+        blade::directive('route', function ($use) {
+            return "<?= route($use) ?>";
+        });
+
+        // Various text helper directives.
+        foreach (['__', 'camel_case', 'kebab_case', 'snake_case','studly_case', 'str_plural', 'title_case'] as $function_name) {
             blade::directive($function_name, function ($text) use ($function_name) {
 
                 $text = implode(',', array_map(function($value) {
@@ -137,6 +150,7 @@ class ServiceProvider extends BaseServiceProvider
             });
         }
 
+        // @str_upper => strtoupper
         blade::directive('str_upper', function ($text) use ($function_name) {
             if (substr($text, 0, 1) !== '$') {
                 $text = "'$text'";
@@ -144,6 +158,7 @@ class ServiceProvider extends BaseServiceProvider
             return "<?= strtoupper($text); ?>";
         });
 
+        // @str_lower => strtolower
         blade::directive('str_lower', function ($text) use ($function_name) {
             if (substr($text, 0, 1) !== '$') {
                 $text = "'$text'";
