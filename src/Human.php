@@ -144,4 +144,30 @@ class Human
 
         return $short_text;
     }
+
+    /**
+     * File upload error codes for humans.
+     *
+     * @param int $code
+     *
+     * @return string
+     */
+    public static function getFileUploadErrorMessage($code)
+    {
+        switch ($code) {
+            case UPLOAD_ERR_INI_SIZE:
+            case UPLOAD_ERR_FORM_SIZE:
+                return 'The uploaded file exceeds the maximum file size';
+            case UPLOAD_ERR_PARTIAL:
+                return 'The uploaded file was only partially uploaded';
+            case UPLOAD_ERR_NO_FILE:
+               return 'No file was uploaded';
+            case UPLOAD_ERR_NO_TMP_DIR:
+            case UPLOAD_ERR_CANT_WRITE:
+            case UPLOAD_ERR_EXTENSION:
+                return 'Server side error occurred';
+        }
+
+        return 'Unknown upload error';
+    }
 }
