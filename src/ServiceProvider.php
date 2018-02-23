@@ -124,6 +124,11 @@ class ServiceProvider extends BaseServiceProvider
             return "<?php $raw; ?>";
         });
 
+        // Multiple lines of php.
+        blade::directive('php', function ($raw) {
+            return "<?php\n$raw\n?>";
+        });
+
         // Use.
         blade::directive('use', function ($use) {
             return "<?php use $use; ?>";
@@ -132,6 +137,36 @@ class ServiceProvider extends BaseServiceProvider
         // Route.
         blade::directive('route', function ($use) {
             return "<?= route($use) ?>";
+        });
+
+        // Format number.
+        blade::directive('locale_currency_symbol', function () {
+            return "<?= locale_currency_symbol() ?>";
+        });
+
+        // Format number.
+        blade::directive('locale_format_number', function ($args) {
+            return "<?= locale_format_number($args) ?>";
+        });
+
+        // Format currency.
+        blade::directive('float_format_currency', function ($args) {
+            return "<?= float_format_currency($args) ?>";
+        });
+
+        // Format date using user format and timezone.
+        blade::directive('user_timedate', function ($args) {
+            return "<?= user_timedate($args) ?>";
+        });
+
+        // Format date using user format and timezone.
+        blade::directive('user_time', function ($args) {
+            return "<?= user_time($args) ?>";
+        });
+
+        // Format date using user format and timezone.
+        blade::directive('user_date', function ($args) {
+            return "<?= user_date($args) ?>";
         });
 
         // Various text helper directives.
