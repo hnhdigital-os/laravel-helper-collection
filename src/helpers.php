@@ -37,14 +37,33 @@ if (! function_exists('array_it')) {
     }
 }
 
+/**
+ * Get's current user.
+ */
+if (! function_exists('user')) {
+    function user($guard = null)
+    {
+        return auth($guard)->user();
+    }
+}
+
+/**
+ * Get's current user.
+ */
+if (! function_exists('user_id')) {
+    function user_id($guard = null)
+    {
+        return auth($guard)->user()->getKey();
+    }
+}
 
 /**
  * Converts a number to locale.
  */
 if (! function_exists('user_locale')) {
-    function user_locale()
+    function user_locale($guard = null)
     {
-        return Auth()->user()->country_code;
+        return user($guard)->country_code;
     }
 }
 
