@@ -20,7 +20,7 @@ class ForceHttps
             $request->server->set('HTTPS', true);
             app('url')->forceScheme('https');
 
-            if (class_exists('\\Roumen\\Asset\\Asset', false)) {
+            if (class_exists('\\Roumen\\Asset\\Asset')) {
                 \Roumen\Asset\Asset::$secure = true;
             }
         }
