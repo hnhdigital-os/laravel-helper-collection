@@ -2,8 +2,6 @@
 
 namespace HnhDigital\HelperCollection\Middleware;
 
-use Closure;
-
 class XhrRequestOnly
 {
     /**
@@ -23,7 +21,7 @@ class XhrRequestOnly
      *
      * @return mixed
      */
-    public function handle($request, Closure $next)
+    public function handle($request, \Closure $next)
     {
         if (!$request->ajax() && !$request->wantsJson()) {
             return response('Unauthorized', 401);
