@@ -45,7 +45,7 @@ class ServiceProvider extends BaseServiceProvider
      */
     public function register()
     {
-        $this->mergeConfigFrom(__DIR__.'/regex.php', 'regex');
+        $this->mergeConfigFrom(__DIR__.'/regex.php', 'hnhdigital.regex');
 
         $this->app->singleton('Aws', function () {
             return new Aws();
