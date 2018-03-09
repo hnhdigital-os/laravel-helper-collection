@@ -172,7 +172,7 @@ class ServiceProvider extends BaseServiceProvider
         });
 
         // Various text helper directives.
-        foreach (['__', 'camel_case', 'kebab_case', 'snake_case','studly_case', 'str_plural', 'title_case'] as $function_name) {
+        foreach (['__', 'camel_case', 'kebab_case', 'snake_case','studly_case', 'str_plural', 'str_tense', 'title_case'] as $function_name) {
             blade::directive($function_name, function ($text) use ($function_name) {
 
                 $text = implode(',', array_map(function($value) {
