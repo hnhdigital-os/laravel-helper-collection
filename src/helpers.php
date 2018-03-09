@@ -43,7 +43,9 @@ if (! function_exists('array_it')) {
 if (! function_exists('user')) {
     function user($guard = null)
     {
-        return auth($guard)->user();
+        if (auth($guard)->check()) {
+            return auth($guard)->user();
+        }
     }
 }
 
@@ -53,7 +55,9 @@ if (! function_exists('user')) {
 if (! function_exists('user_id')) {
     function user_id($guard = null)
     {
-        return auth($guard)->user()->getKey();
+        if (auth($guard)->check()) {
+            return auth($guard)->user()->getKey();
+        }
     }
 }
 
@@ -63,7 +67,11 @@ if (! function_exists('user_id')) {
 if (! function_exists('user_locale')) {
     function user_locale($guard = null)
     {
-        return user($guard)->country_code;
+        if (auth($guard)->check()) {
+            return user($guard)->country_code;
+        }
+
+        return app()->getLocale();
     }
 }
 
@@ -164,5 +172,23 @@ if (! function_exists('timezone_format')) {
     function timezone_format($return)
     {
         return $return ? ' T' : '';
+    }
+}
+
+/**
+ * Converts word to correct tense.
+ */
+if (! function_exists('str_tense')) {
+    function str_tense($word, $count)
+    {
+        if (in_array($word, ['is', 'are'])) {
+            if ($count == 0 || $count > 1) {
+                return 'are';
+            }
+
+            return 'is';
+        }
+
+        return $word;
     }
 }
