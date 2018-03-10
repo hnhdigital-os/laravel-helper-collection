@@ -131,6 +131,11 @@ class ServiceProvider extends BaseServiceProvider
             return "<?php\n$raw\n?>";
         });
 
+        // Share with view.
+        blade::directive('share', function ($share) {
+            return "<?php view()->share($share); ?>";
+        });
+
         // Use.
         blade::directive('use', function ($use) {
             return "<?php use $use; ?>";
