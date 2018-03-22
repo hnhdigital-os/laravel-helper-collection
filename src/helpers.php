@@ -67,7 +67,7 @@ if (! function_exists('user_id')) {
 if (! function_exists('user_locale')) {
     function user_locale($guard = null)
     {
-        if (auth($guard)->check()) {
+        if (auth($guard)->check() && !empty(user($guard)->country_code)) {
             return user($guard)->country_code;
         }
 
