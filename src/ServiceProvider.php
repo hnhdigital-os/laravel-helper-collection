@@ -94,12 +94,12 @@ class ServiceProvider extends BaseServiceProvider
     private function registerBladeDirectives()
     {
         // Start capturing.
-        blade::directive('capturestart', function () {
+        blade::directive('capture', function () {
             return '<?php ob_start(); ?>';
         });
 
         // Stop capturing.
-        blade::directive('capturestop', function ($name) {
+        blade::directive('endcapture', function ($name) {
             if (substr($name, 0, 1) == '$') {
                 $name = substr($text, 1);
             }
