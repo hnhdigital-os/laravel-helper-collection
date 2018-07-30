@@ -51,6 +51,10 @@ class ServiceProvider extends BaseServiceProvider
             return new Aws();
         });
 
+        $this->app->singleton('Color', function () {
+            return new Color();
+        });
+
         $this->app->singleton('Database', function () {
             return new Database();
         });
