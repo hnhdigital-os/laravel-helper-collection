@@ -89,7 +89,7 @@ class ServiceProvider extends BaseServiceProvider
      */
     public function provides()
     {
-        return ['Aws', 'Database', 'FileSystem', 'Human', 'LaravelModel', 'SemVer', 'Timezone'];
+        return ['Aws', 'Color', 'Database', 'FileSystem', 'Human', 'LaravelModel', 'SemVer', 'Timezone'];
     }
 
     /**
