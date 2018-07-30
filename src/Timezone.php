@@ -2,8 +2,8 @@
 
 namespace HnhDigital\HelperCollection;
 
-use DateTimeZone;
 use Carbon\Carbon;
+use DateTimeZone;
 
 class Timezone
 {
@@ -38,7 +38,7 @@ class Timezone
             $zones = DateTimeZone::listIdentifiers($mask);
 
             foreach ($zones as $timezone) {
-                
+
                 // Time at this timezone.
                 $time = Carbon::now($timezone);
 
@@ -65,7 +65,7 @@ class Timezone
                 }
 
                 // Place entry.
-                array_set($timezones, strtoupper($region).'.'.$timezone, sprintf('%s %s %s', 
+                array_set($timezones, strtoupper($region).'.'.$timezone, sprintf('%s %s %s',
                     $name,
                     $offset,
                     $current_time
