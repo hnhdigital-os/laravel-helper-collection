@@ -3,7 +3,7 @@
 namespace HnhDigital\HelperCollection;
 
 /*
- * This file is part of Laravel Navigation Builder.
+ * This file is part of Laravel Helper Collection.
  *
  * (c) Rocco Howard <rocco@hnh.digital>
  *
