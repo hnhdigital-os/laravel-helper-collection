@@ -35,7 +35,9 @@ class ServiceProvider extends BaseServiceProvider
      */
     public function boot()
     {
-        $this->registerBladeDirectives();
+        if ($this->app['config']->get('hnhdigital.blade.enabled')) {
+            $this->registerBladeDirectives();
+        }
     }
 
     /**
