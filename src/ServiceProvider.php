@@ -152,7 +152,7 @@ class ServiceProvider extends BaseServiceProvider
 
         // Format number.
         blade::directive('locale_currency_symbol', function () {
-            return "<?= locale_currency_symbol() ?>";
+            return '<?= locale_currency_symbol() ?>';
         });
 
         // Format number.
@@ -181,14 +181,14 @@ class ServiceProvider extends BaseServiceProvider
         });
 
         // Various text helper directives.
-        foreach (['__', 'camel_case', 'kebab_case', 'snake_case','studly_case', 'str_plural', 'str_tense', 'title_case'] as $function_name) {
+        foreach (['__', 'camel_case', 'kebab_case', 'snake_case', 'studly_case', 'str_plural', 'str_tense', 'title_case'] as $function_name) {
             blade::directive($function_name, function ($text) use ($function_name) {
-
-                $text = implode(',', array_map(function($value) {
+                $text = implode(',', array_map(function ($value) {
                     $value = trim($value, "'\" ");
                     if (substr($value, 0, 1) !== '$') {
                         $value = "'$value'";
                     }
+
                     return $value;
                 }, explode(',', $text)));
 
@@ -201,6 +201,7 @@ class ServiceProvider extends BaseServiceProvider
             if (substr($text, 0, 1) !== '$') {
                 $text = "'$text'";
             }
+
             return "<?= strtoupper($text); ?>";
         });
 
@@ -209,6 +210,7 @@ class ServiceProvider extends BaseServiceProvider
             if (substr($text, 0, 1) !== '$') {
                 $text = "'$text'";
             }
+
             return "<?= strtolower($text); ?>";
         });
     }
