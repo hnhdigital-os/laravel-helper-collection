@@ -44,7 +44,7 @@ class Human
     /**
      * Convert an integer timeset to pretty.
      *
-     * @param integer $offset
+     * @param int $offset
      *
      * @return string
      */
@@ -59,8 +59,8 @@ class Human
     /**
      * Convert seconds to words.
      *
-     * @param integer $seconds
-     * @param array   $options
+     * @param int   $seconds
+     * @param array $options
      *
      * @return string
      */
@@ -119,8 +119,8 @@ class Human
      * Truncate a string.
      *
      * @param string $long_text
-     * @param integer $length
-     * @param array $options
+     * @param int    $length
+     * @param array  $options
      *
      * @return string
      */

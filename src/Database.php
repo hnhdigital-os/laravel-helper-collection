@@ -8,7 +8,7 @@ class Database
         '1d' => [1, 'DAY'],
         '7d' => [7, 'DAY'],
         '1m' => [1, 'MONTH'],
-        '1y' => [1, 'YEAR']
+        '1y' => [1, 'YEAR'],
     ];
 
     /**
@@ -24,8 +24,8 @@ class Database
             return array_get(self::$static_unit_interval, $unit_interval);
         }
 
-        $unit = preg_replace("/([A-Za-z]*?)/", '', $unit_interval);
-        $interval = preg_replace("/([0-9]*?)/", '', $unit_interval);
+        $unit = preg_replace('/([A-Za-z]*?)/', '', $unit_interval);
+        $interval = preg_replace('/([0-9]*?)/', '', $unit_interval);
 
         $interval = $this->convertInterval($interval);
 

@@ -81,7 +81,6 @@ class LaravelModel
         }
 
         foreach ($relationships as $relation_name => &$relationship) {
-
             if (empty($relationship)) {
                 $relationship = $this->getModelRelation($primary_model->$relation_name());
             }

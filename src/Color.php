@@ -18,7 +18,7 @@ class Color
             $hex = substr($hex, 1);
         }
 
-        $color = $this->contrastFromRGB(...sscanf($hex, "%02x%02x%02x"));
+        $color = $this->contrastFromRGB(...sscanf($hex, '%02x%02x%02x'));
 
         return sprintf('%s%02x%02x%02x', $hash, $color['r'], $color['g'], $color['b']);
     }
@@ -37,7 +37,7 @@ class Color
         return [
             'r' => ($r < 128) ? 255 : 0,
             'g' => ($g < 128) ? 255 : 0,
-            'b' => ($b < 128) ? 255 : 0
+            'b' => ($b < 128) ? 255 : 0,
         ];
     }
 }
