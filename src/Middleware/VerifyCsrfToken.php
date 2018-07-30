@@ -1,4 +1,5 @@
 <?php
+
 namespace HnhDigital\HelperCollection\Middleware;
 
 use Closure;
@@ -24,6 +25,7 @@ class VerifyCsrfToken extends ParentVerifyCsrfToken
                 echo array_get($_SERVER, 'HTTP_REFERER', array_get($_SERVER, 'HTTP_ORIGIN', secure_url('')));
                 exit();
             }
+
             return $next($request);
         }
     }
