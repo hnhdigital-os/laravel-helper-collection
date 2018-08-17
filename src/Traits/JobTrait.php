@@ -78,7 +78,6 @@ trait JobTrait
                 $data
             );
         } elseif ($value !== false) {
-
             if (stripos($value, '%') === false) {
                 $value_length = mb_strlen($value);
             } else {
@@ -145,7 +144,6 @@ trait JobTrait
      * Set available_at attribute.
      *
      * @param string $value
-     *
      * @param $this
      */
     public function setAvailableAtAttribute($value)
