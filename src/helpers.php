@@ -125,6 +125,10 @@ if (!function_exists('user_timezone')) {
             $datetime = Carbon\Carbon::now('UTC');
         }
 
+        if (is_string($datetime)) {
+            $datetime = new Carbon\Carbon($datetime);
+        }
+
         if (auth()->check()) {
             return Auth()->user()->timezone($datetime);
         }
