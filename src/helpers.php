@@ -143,7 +143,7 @@ if (!function_exists('user_timezone')) {
 if (!function_exists('user_timedate')) {
     function user_timedate($datetime, $timezone = true)
     {
-        if (auth($auth()->guard())->check()) {
+        if (auth()->check()) {
             $format = Auth()->user()->time_date_format;
         } else {
             $format = 'Y-m-d H:i';
