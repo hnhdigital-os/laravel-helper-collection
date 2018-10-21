@@ -125,7 +125,11 @@ if (!function_exists('user_timezone')) {
             $datetime = Carbon\Carbon::now('UTC');
         }
 
-        return Auth()->user()->timezone($datetime);
+        if (auth()->check()) {
+            return Auth()->user()->timezone($datetime);
+        }
+
+        return $datetime->timezone('GMT');
     }
 }
 
@@ -135,7 +139,12 @@ if (!function_exists('user_timezone')) {
 if (!function_exists('user_timedate')) {
     function user_timedate($datetime, $timezone = true)
     {
-        $format = Auth()->user()->time_date_format;
+        if (auth($auth()->guard())->check()) {
+            $format = Auth()->user()->time_date_format;
+        } else {
+            $format = 'Y-m-d H:i';
+        }
+
         $format .= timezone_format($timezone);
 
         return user_timezone($datetime)->format($format);
@@ -148,9 +157,12 @@ if (!function_exists('user_timedate')) {
 if (!function_exists('user_time')) {
     function user_time($datetime, $timezone = true)
     {
-        $format = Auth()->user()->time_format;
+        if (auth()->check()) {
+            $format = Auth()->user()->time_format;
+        } else {
+            $format = 'H:i';
+        }
         $format .= timezone_format($timezone);
-
         return user_timezone($datetime)->format($format);
     }
 }
@@ -161,9 +173,12 @@ if (!function_exists('user_time')) {
 if (!function_exists('user_date')) {
     function user_date($datetime, $timezone = true)
     {
-        $format = Auth()->user()->date_format;
+        if (auth()->check()) {
+            $format = Auth()->user()->date_format;
+        } else {
+            $format = 'Y-m-d';
+        }
         $format .= timezone_format($timezone);
-
         return user_timezone($datetime)->format($format);
     }
 }
