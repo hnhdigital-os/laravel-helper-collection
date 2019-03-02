@@ -31,7 +31,7 @@ trait JobTrait
     public function scopeModel($query, $model, $key)
     {
         $query->whereRaw(sprintf(
-            'payload->"$.data.command" LIKE \'%%id\\\\\\\\";s:36:\\\\\\\\"%s\\\\\\\\";%%\'',
+            'payload->"$.data.command" LIKE \'%%id\\\\";s:36:\\\\"%s\\\\";%%\'',
             $key
         ));
     }
@@ -85,7 +85,7 @@ trait JobTrait
             }
 
             $data = sprintf(
-                's:%s\\\\\\\\"%s\\\\\\\\"',
+                's:%s:\\\\\\\\"%s\\\\\\\\"',
                 $value_length,
                 $value
             );
@@ -178,6 +178,6 @@ trait JobTrait
      */
     public static function encodeQueryValue($value)
     {
-        return str_replace('\\', '\\\\\\\\\\\\\\\\', $value);
+        return str_replace('\\', '\\\\\\\\', $value);
     }
 }
