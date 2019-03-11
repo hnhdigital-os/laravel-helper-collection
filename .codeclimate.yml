@@ -1,12 +1,18 @@
-engines:
-  duplication:
+version: "2"
+checks:
+  similar-code:
     enabled: true
-    checks:
-      Identical code:
-        enabled: false
     config:
       languages:
       - php
+  identical-code:
+    enabled: true
+    config:
+      languages:
+      - php
+plugins:
+  phpcodesniffer:
+    enabled: true
   fixme:
     enabled: true
   phpmd:
@@ -22,8 +28,5 @@ engines:
         enabled: false
       Naming/ShortMethodName:
         enabled: false
-ratings:
-  paths:
-  - "**.php"
-exclude_paths:
-- tests/
+exclude_patterns:
+- "tests/"
