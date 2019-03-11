@@ -16,7 +16,7 @@ class ForceHttps
      */
     public function handle($request, \Closure $next)
     {
-        if (env('APP_FORCE_HTTPS', false)) {
+        if (config('app.force_https', false)) {
             $request->server->set('HTTPS', true);
             app('url')->forceScheme('https');
 
