@@ -2,6 +2,8 @@
 
 namespace HnhDigital\HelperCollection;
 
+use DB;
+
 trait UuidTrait
 {
     /**
