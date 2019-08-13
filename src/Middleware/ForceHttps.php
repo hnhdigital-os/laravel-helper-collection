@@ -2,8 +2,6 @@
 
 namespace HnhDigital\HelperCollection\Middleware;
 
-use URL;
-
 class ForceHttps
 {
     /**
@@ -19,10 +17,6 @@ class ForceHttps
         if (config('app.force_https', false)) {
             $request->server->set('HTTPS', true);
             app('url')->forceScheme('https');
-
-            if (class_exists('\\Roumen\\Asset\\Asset')) {
-                \Roumen\Asset\Asset::$secure = true;
-            }
         }
 
         return $next($request);
