@@ -72,7 +72,7 @@ class LaravelModel
             $relationships = [$relationships => []];
         }
 
-        if (!is_array($relationships)) {
+        if (! is_array($relationships)) {
             $relationships = [$relationships];
         }
 
