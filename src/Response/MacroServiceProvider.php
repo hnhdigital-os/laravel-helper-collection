@@ -2,8 +2,8 @@
 
 namespace HnhDigital\HelperCollection\Response;
 
-use Illuminate\Support\Facades\Response;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Response;
 
 class MacroServiceProvider extends ServiceProvider
 {
@@ -17,7 +17,7 @@ class MacroServiceProvider extends ServiceProvider
         // Providesd the ability to download a file from a given path.
         // Will also return a not modified header if file has not changed.
         Response::macro('downloadAndCache', function ($file_path) {
-            if (!empty(request()->header('If-Modified-Since'))) {
+            if (! empty(request()->header('If-Modified-Since'))) {
                 $cache_last_modified = strtotime(request()->header('If-Modified-Since'));
                 $file_last_modified = filemtime($file_path);
                 if ($file_last_modified == $cache_last_modified) {

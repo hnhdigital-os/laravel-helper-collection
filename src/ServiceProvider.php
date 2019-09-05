@@ -100,7 +100,7 @@ class ServiceProvider extends BaseServiceProvider
     private function registerBladeDirectives()
     {
         // Start capturing.
-        if (!$this->app['config']->has('hnhdigital.blade.disable.capture')) {
+        if (! $this->app['config']->has('hnhdigital.blade.disable.capture')) {
             blade::directive('capture', function () {
                 return '<?php ob_start(); ?>';
             });
@@ -117,7 +117,7 @@ class ServiceProvider extends BaseServiceProvider
         }
 
         // Call.
-        if (!$this->app['config']->has('hnhdigital.blade.disable.call')) {
+        if (! $this->app['config']->has('hnhdigital.blade.disable.call')) {
             blade::directive('call', function ($call) {
                 $name = trim($name, "'\"");
 
@@ -127,35 +127,35 @@ class ServiceProvider extends BaseServiceProvider
 
         // CSRF.
         // @todo Remove when dropping L5.5 support.
-        if (!$this->app['config']->has('hnhdigital.blade.disable.csrf')) {
+        if (! $this->app['config']->has('hnhdigital.blade.disable.csrf')) {
             blade::directive('csrf', function () {
                 return '<?= csrf_field(); ?>';
             });
         }
 
         // Single line of php
-        if (!$this->app['config']->has('hnhdigital.blade.disable.raw')) {
+        if (! $this->app['config']->has('hnhdigital.blade.disable.raw')) {
             blade::directive('raw', function ($raw) {
                 return "<?php $raw; ?>";
             });
         }
 
         // Multiple lines of php.
-        if (!$this->app['config']->has('hnhdigital.blade.disable.php')) {
+        if (! $this->app['config']->has('hnhdigital.blade.disable.php')) {
             blade::directive('php', function ($raw) {
                 return "<?php\n$raw\n?>";
             });
         }
 
         // Share with view.
-        if (!$this->app['config']->has('hnhdigital.blade.disable.share')) {
+        if (! $this->app['config']->has('hnhdigital.blade.disable.share')) {
             blade::directive('share', function ($share) {
                 return "<?php view()->share($share); ?>";
             });
         }
 
         // Use.
-        if (!$this->app['config']->has('hnhdigital.blade.disable.use')) {
+        if (! $this->app['config']->has('hnhdigital.blade.disable.use')) {
             blade::directive('use', function ($use) {
                 return "<?php use $use; ?>";
             });
@@ -166,7 +166,7 @@ class ServiceProvider extends BaseServiceProvider
             return "<?= route($use) ?>";
         });
 
-        if (!$this->app['config']->has('hnhdigital.blade.disable.locale')) {
+        if (! $this->app['config']->has('hnhdigital.blade.disable.locale')) {
             // Format number.
             blade::directive('locale_currency_symbol', function () {
                 return '<?= locale_currency_symbol() ?>';
@@ -183,7 +183,7 @@ class ServiceProvider extends BaseServiceProvider
             });
         }
 
-        if (!$this->app['config']->has('hnhdigital.blade.disable.datetime')) {
+        if (! $this->app['config']->has('hnhdigital.blade.disable.datetime')) {
             // Format date using user format and timezone.
             blade::directive('user_timedate', function ($args) {
                 return "<?= user_timedate($args) ?>";
@@ -201,7 +201,7 @@ class ServiceProvider extends BaseServiceProvider
         }
 
         // Various text helper directives.
-        if (!$this->app['config']->has('hnhdigital.blade.disable.text')) {
+        if (! $this->app['config']->has('hnhdigital.blade.disable.text')) {
             foreach (['__', 'camel_case', 'kebab_case', 'snake_case', 'studly_case', 'str_plural', 'str_tense', 'title_case'] as $function_name) {
                 blade::directive($function_name, function ($text) use ($function_name) {
                     $text = implode(',', array_map(function ($value) {

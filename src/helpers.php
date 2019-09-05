@@ -5,7 +5,7 @@ use Symfony\Component\Intl\Intl;
 /*
  * Converts a list of items into a dotted representation.
  */
-if (!function_exists('array_dotize')) {
+if (! function_exists('array_dotize')) {
     function array_dotize(...$keys)
     {
         return implode('.', $keys);
@@ -15,18 +15,18 @@ if (!function_exists('array_dotize')) {
 /*
  * Converts a string, an array of strings, or a collection into an array of values.
  */
-if (!function_exists('array_it')) {
+if (! function_exists('array_it')) {
     function array_it($values, $key = false)
     {
         $result = [];
 
-        if (!($values instanceof \Illuminate\Database\Eloquent\Collection)) {
+        if (! ($values instanceof \Illuminate\Database\Eloquent\Collection)) {
             $values = is_array($values) ? $values : [$values];
         }
 
         foreach ($values as $value) {
             // Check given values. If any have eloquent models, convert to their key value.
-            if (!empty($key) && is_object($value) && $value instanceof \Illuminate\Database\Eloquent\Model) {
+            if (! empty($key) && is_object($value) && $value instanceof \Illuminate\Database\Eloquent\Model) {
                 $result[] = $key === true ? $value->getKey() : $value->$key;
             } else {
                 $result[] = $value;
@@ -40,7 +40,7 @@ if (!function_exists('array_it')) {
 /*
  * Get's current user.
  */
-if (!function_exists('user')) {
+if (! function_exists('user')) {
     function user($guard = null)
     {
         if (auth($guard)->check()) {
@@ -52,7 +52,7 @@ if (!function_exists('user')) {
 /*
  * Get's current user.
  */
-if (!function_exists('user_id')) {
+if (! function_exists('user_id')) {
     function user_id($guard = null)
     {
         if (auth($guard)->check()) {
@@ -64,10 +64,10 @@ if (!function_exists('user_id')) {
 /*
  * Converts a number to locale.
  */
-if (!function_exists('user_locale')) {
+if (! function_exists('user_locale')) {
     function user_locale($guard = null)
     {
-        if (auth($guard)->check() && !empty(user($guard)->country_code)) {
+        if (auth($guard)->check() && ! empty(user($guard)->country_code)) {
             return user($guard)->country_code;
         }
 
@@ -75,7 +75,7 @@ if (!function_exists('user_locale')) {
     }
 }
 
-if (!function_exists('locale_format_number')) {
+if (! function_exists('locale_format_number')) {
     function locale_format_number($money, $config = [])
     {
         $money->setLocale(user_locale());
@@ -84,14 +84,14 @@ if (!function_exists('locale_format_number')) {
     }
 }
 
-if (!function_exists('locale_currency_symbol')) {
+if (! function_exists('locale_currency_symbol')) {
     function locale_currency_symbol($currency = 'USD')
     {
         return Intl::getCurrencyBundle()->getCurrencySymbol($currency);
     }
 }
 
-if (!function_exists('float_format_currency')) {
+if (! function_exists('float_format_currency')) {
     function float_format_currency($value)
     {
         $value = preg_replace("/([-]?)(.*?)\xC2\xA0([0-9,.]*)/", '<span class="f-left">$2</span> $1$3', $value, -1, $count);
@@ -108,7 +108,7 @@ if (!function_exists('float_format_currency')) {
 /*
  * Converts a DateTime to user's timezone.
  */
-if (!function_exists('user_tz')) {
+if (! function_exists('user_tz')) {
     function user_tz()
     {
         return Auth()->user()->timezone;
@@ -118,7 +118,7 @@ if (!function_exists('user_tz')) {
 /*
  * Converts a DateTime to user's timezone.
  */
-if (!function_exists('user_timezone')) {
+if (! function_exists('user_timezone')) {
     function user_timezone($datetime = null)
     {
         if (is_null($datetime)) {
@@ -140,7 +140,7 @@ if (!function_exists('user_timezone')) {
 /*
  * Converts a DateTime to user's timezone and specified time/date format.
  */
-if (!function_exists('user_timedate')) {
+if (! function_exists('user_timedate')) {
     function user_timedate($datetime, $timezone = true)
     {
         if (auth()->check()) {
@@ -158,7 +158,7 @@ if (!function_exists('user_timedate')) {
 /*
  * Converts a DateTime to user's timezone and specified time format.
  */
-if (!function_exists('user_time')) {
+if (! function_exists('user_time')) {
     function user_time($datetime, $timezone = true)
     {
         if (auth()->check()) {
@@ -175,7 +175,7 @@ if (!function_exists('user_time')) {
 /*
  * Converts a DateTime to user's timezone and specified date format.
  */
-if (!function_exists('user_date')) {
+if (! function_exists('user_date')) {
     function user_date($datetime, $timezone = true)
     {
         if (auth()->check()) {
@@ -192,7 +192,7 @@ if (!function_exists('user_date')) {
 /*
  * Converts a DateTime to user's timezone and specified date format.
  */
-if (!function_exists('timezone_format')) {
+if (! function_exists('timezone_format')) {
     function timezone_format($return)
     {
         return $return ? ' T' : '';
@@ -202,7 +202,7 @@ if (!function_exists('timezone_format')) {
 /*
  * Converts word to correct tense.
  */
-if (!function_exists('str_tense')) {
+if (! function_exists('str_tense')) {
     function str_tense($word, $count)
     {
         if (in_array($word, ['is', 'are'])) {

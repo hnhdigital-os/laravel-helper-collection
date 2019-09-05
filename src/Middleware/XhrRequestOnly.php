@@ -23,7 +23,7 @@ class XhrRequestOnly
      */
     public function handle($request, \Closure $next)
     {
-        if (!$request->ajax() && !$request->wantsJson()) {
+        if (! $request->ajax() && ! $request->wantsJson()) {
             return response('Unauthorized', 401);
         }
 
