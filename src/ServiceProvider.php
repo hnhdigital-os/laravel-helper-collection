@@ -12,6 +12,7 @@ namespace HnhDigital\HelperCollection;
  */
 
 use Blade;
+use Illuminate\Support\Arr;
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
 
 /**
@@ -212,6 +213,16 @@ class ServiceProvider extends BaseServiceProvider
 
                         return $value;
                     }, explode(',', $text)));
+
+                    if (stripos($function_name, '_case') !== false) {
+                        $function_name = str_replace('_case', '', $function_name);
+                        $function_name = 'Str::'.$function_name;
+                    }
+
+                    if (stripos($function_name, 'str_') !== false) {
+                        $function_name = str_replace('str_', '', $function_name);
+                        $function_name = 'Str::'.$function_name;
+                    }
 
                     return "<?= $function_name($text); ?>";
                 });

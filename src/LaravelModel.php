@@ -2,6 +2,8 @@
 
 namespace HnhDigital\HelperCollection;
 
+use Illuminate\Support\Arr;
+
 class LaravelModel
 {
     /**
@@ -86,11 +88,11 @@ class LaravelModel
             }
 
             // Required variables.
-            $model = array_get($relationship, 'model');
-            $method = array_get($relationship, 'method');
-            $table = array_get($relationship, 'table');
-            $parent_key = array_get($relationship, 'parent_key');
-            $foreign_key = array_get($relationship, 'foreign_key');
+            $model = Arr::get($relationship, 'model');
+            $method = Arr::get($relationship, 'method');
+            $table = Arr::get($relationship, 'table');
+            $parent_key = Arr::get($relationship, 'parent_key');
+            $foreign_key = Arr::get($relationship, 'foreign_key');
 
             // Add the columns from the other table.
             // @todo do we need this?

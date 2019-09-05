@@ -2,6 +2,8 @@
 
 namespace HnhDigital\HelperCollection;
 
+use Illuminate\Support\Arr;
+
 class Aws
 {
     /**
@@ -12,11 +14,11 @@ class Aws
     public function client($override = [])
     {
         return [
-            'version'     => array_get($override, 'version', config('hnhdigital.aws.version')),
-            'region'      => array_get($override, 'region', config('hnhdigital.aws.region')),
+            'version'     => Arr::get($override, 'version', config('hnhdigital.aws.version')),
+            'region'      => Arr::get($override, 'region', config('hnhdigital.aws.region')),
             'credentials' => [
-                'key'    => array_get($override, 'key', config('hnhdigital.aws.key')),
-                'secret' => array_get($override, 'secret', config('hnhdigital.aws.secret')),
+                'key'    => Arr::get($override, 'key', config('hnhdigital.aws.key')),
+                'secret' => Arr::get($override, 'secret', config('hnhdigital.aws.secret')),
             ],
         ];
     }

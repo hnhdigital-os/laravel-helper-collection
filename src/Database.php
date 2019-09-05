@@ -2,6 +2,8 @@
 
 namespace HnhDigital\HelperCollection;
 
+use Illuminate\Support\Arr;
+
 class Database
 {
     private static $static_unit_interval = [
@@ -20,8 +22,8 @@ class Database
      */
     public function parseUnitInterval($unit_interval)
     {
-        if (array_has(self::$static_unit_interval, $unit_interval)) {
-            return array_get(self::$static_unit_interval, $unit_interval);
+        if (Arr::has(self::$static_unit_interval, $unit_interval)) {
+            return Arr::get(self::$static_unit_interval, $unit_interval);
         }
 
         $unit = preg_replace('/([A-Za-z]*?)/', '', $unit_interval);

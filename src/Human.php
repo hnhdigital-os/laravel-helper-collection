@@ -2,6 +2,8 @@
 
 namespace HnhDigital\HelperCollection;
 
+use Illuminate\Support\Arr;
+
 class Human
 {
     /**
@@ -90,7 +92,7 @@ class Human
             $name = 'day';
         }
 
-        if (array_has($options, 'abbrev')) {
+        if (Arr::has($options, 'abbrev')) {
             switch ($name) {
                 case 'second':
                     $name = 'sec';
@@ -101,7 +103,7 @@ class Human
             }
         }
 
-        if (array_has($options, 'single')) {
+        if (Arr::has($options, 'single')) {
             $name = substr($name, 0, 1);
         }
 
@@ -134,11 +136,11 @@ class Human
 
         $short_text .= '...';
 
-        if (array_get($options, 'html', false)) {
+        if (Arr::get($options, 'html', false)) {
             $short_text .= ' <span class="f-10 f-w-100">(truncated)</span>';
         }
 
-        if (array_get($options, 'html', false)) {
+        if (Arr::get($options, 'html', false)) {
             $short_text = sprintf('<span title="%s">%s</span>', htmlspecialchars($long_text), $short_text);
         }
 
