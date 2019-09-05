@@ -2,8 +2,9 @@
 
 namespace HnhDigital\HelperCollection;
 
-use Carbon\Carbon;
 use DateTimeZone;
+use Carbon\Carbon;
+use Illuminate\Support\Arr;
 
 class Timezone
 {
@@ -49,23 +50,23 @@ class Timezone
                 $name = $timezone;
 
                 // Remove the region from the name.
-                if (array_get($config, 'remove-region', false)) {
+                if (Arr::get($config, 'remove-region', false)) {
                     $name = substr($timezone, strlen($region) + 1);
                 }
 
                 // Remove the offset.
-                if (array_get($config, 'remove-offset', false)) {
+                if (Arr::get($config, 'remove-offset', false)) {
                     $offset = '';
                 }
 
                 // Show the time.
                 $current_time = '';
-                if (array_get($config, 'show-time', false)) {
-                    $current_time = $time->format(array_get($config, 'show-time-format', 'g:ia'));
+                if (Arr::get($config, 'show-time', false)) {
+                    $current_time = $time->format(Arr::get($config, 'show-time-format', 'g:ia'));
                 }
 
                 // Place entry.
-                array_set($timezones, strtoupper($region).'.'.$timezone, sprintf('%s %s %s',
+                Arr::set($timezones, strtoupper($region).'.'.$timezone, sprintf('%s %s %s',
                     $name,
                     $offset,
                     $current_time
@@ -90,8 +91,8 @@ class Timezone
         $result = [];
 
         foreach ($data as $name => $zones) {
-            if (array_get($config, 'include-region', false)) {
-                $result[] = [array_get($config, 'region-value', null), $name];
+            if (Arr::get($config, 'include-region', false)) {
+                $result[] = [Arr::get($config, 'region-value', null), $name];
             }
             foreach ($zones as $timezone => $zone) {
                 $result[] = [$timezone, $zone];
