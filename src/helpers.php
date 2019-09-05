@@ -167,6 +167,7 @@ if (!function_exists('user_time')) {
             $format = 'H:i';
         }
         $format .= timezone_format($timezone);
+
         return user_timezone($datetime)->format($format);
     }
 }
@@ -183,6 +184,7 @@ if (!function_exists('user_date')) {
             $format = 'Y-m-d';
         }
         $format .= timezone_format($timezone);
+
         return user_timezone($datetime)->format($format);
     }
 }
