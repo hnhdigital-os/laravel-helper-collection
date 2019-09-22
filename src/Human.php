@@ -3,6 +3,8 @@
 namespace HnhDigital\HelperCollection;
 
 use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
+
 
 class Human
 {
@@ -84,12 +86,12 @@ class Human
         if ($time >= 60) {
             $time = round($time / 60, 0);
             $name = 'hour';
-        }
 
-        // Days.
-        if ($time >= 24) {
-            $time = round($time / 24, 0);
-            $name = 'day';
+            // Days.
+            if ($time >= 24) {
+                $time = round($time / 24, 0);
+                $name = 'day';
+            }
         }
 
         if (Arr::has($options, 'abbrev')) {
@@ -107,11 +109,10 @@ class Human
             $name = substr($name, 0, 1);
         }
 
-        if ($time == 1) {
-            $time = '';
+        if ($time === 1) {
             $period = $name;
         } else {
-            $period = str_plural($name, $time);
+            $period = Str::plural($name, $time);
         }
 
         return sprintf('%s %s', $time, $period);
