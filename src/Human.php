@@ -5,7 +5,6 @@ namespace HnhDigital\HelperCollection;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 
-
 class Human
 {
     /**

@@ -2,8 +2,8 @@
 
 namespace HnhDigital\HelperCollection\Response;
 
-use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Response;
+use Illuminate\Support\ServiceProvider;
 
 class MacroServiceProvider extends ServiceProvider
 {
