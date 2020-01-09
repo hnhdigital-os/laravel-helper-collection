@@ -58,6 +58,10 @@ class ServiceProvider extends BaseServiceProvider
             return new Color();
         });
 
+        $this->app->singleton('DateHelper', function () {
+            return new DateHelper();
+        });
+
         $this->app->singleton('Database', function () {
             return new Database();
         });
@@ -90,7 +94,7 @@ class ServiceProvider extends BaseServiceProvider
      */
     public function provides()
     {
-        return ['Aws', 'Color', 'Database', 'FileSystem', 'Human', 'LaravelModel', 'SemVer', 'Timezone'];
+        return ['Aws', 'Color', 'Database', 'DateHelper', 'FileSystem', 'Human', 'LaravelModel', 'SemVer', 'Timezone'];
     }
 
     /**
