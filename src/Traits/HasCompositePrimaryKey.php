@@ -3,7 +3,10 @@
 namespace HnhDigital\HelperCollection\Traits;
 
 /**
+ * To apply this trait, you need to override the eloquent getAttribute method to cover situations where
+ * the primary key is requested and this method is called.
  *
+ * ```
  * use HnhDigital\HelperCollection\Traits\HasCompositePrimaryKey;
  * use Illuminate\Database\Eloquent\Concerns\HasAttributes as EloquentHasAttributes;
  *
@@ -12,8 +15,9 @@ namespace HnhDigital\HelperCollection\Traits;
  *     use EloquentHasAttributes, HasCompositePrimaryKey {
  *         EloquentHasAttributes::getAttribute as eloquentGetAttribute;
  *         Concerns\HasAttributes::getAttribute insteadof EloquentHasAttributes;
- *     };
+ *     }
  * }
+ * ```
  */
 
 use Illuminate\Database\Eloquent\Builder;
