@@ -12,7 +12,6 @@ namespace HnhDigital\HelperCollection;
  */
 
 use Blade;
-use Illuminate\Support\Arr;
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
 
 /**

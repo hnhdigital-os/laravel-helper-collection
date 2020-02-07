@@ -3,8 +3,8 @@
 namespace HnhDigital\HelperCollection\Middleware;
 
 use Closure;
-use Illuminate\Support\Arr;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken as ParentVerifyCsrfToken;
+use Illuminate\Support\Arr;
 
 class VerifyCsrfToken extends ParentVerifyCsrfToken
 {
