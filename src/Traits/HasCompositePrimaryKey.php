@@ -2,6 +2,20 @@
 
 namespace HnhDigital\HelperCollection\Traits;
 
+/**
+ *
+ * use HnhDigital\HelperCollection\Traits\HasCompositePrimaryKey;
+ * use Illuminate\Database\Eloquent\Concerns\HasAttributes as EloquentHasAttributes;
+ *
+ * class ... extends ...
+ * {
+ *     use EloquentHasAttributes, HasCompositePrimaryKey {
+ *         EloquentHasAttributes::getAttribute as eloquentGetAttribute;
+ *         Concerns\HasAttributes::getAttribute insteadof EloquentHasAttributes;
+ *     };
+ * }
+ */
+
 use Illuminate\Database\Eloquent\Builder;
 
 trait HasCompositePrimaryKey
@@ -46,5 +60,26 @@ trait HasCompositePrimaryKey
         }
 
         return $this->getAttribute($keyName);
+    }
+
+    /**
+     * Get attribute override when primaryKey is composite.
+     *
+     * @param  string  $key
+     * @return mixed
+     */
+    public function getAttribute($keys)
+    {
+        if (! is_array($keys)) {
+            return $this->eloquentGetAttribute($keys);
+        }
+
+        $value = [];
+
+        foreach ($keys as $key) {
+            $value[] = $this->eloquentGetAttribute($key);
+        }
+
+        return implode(';', $value);
     }
 }
