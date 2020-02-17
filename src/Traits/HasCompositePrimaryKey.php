@@ -2,26 +2,32 @@
 
 namespace HnhDigital\HelperCollection\Traits;
 
+use Illuminate\Database\Eloquent\Builder;
+
 /**
- * To apply this trait, you need to override the eloquent getAttribute method to cover situations where
- * the primary key is requested and this method is called.
+ * To use this trait, you must install it using:-
  *
  * ```
+ * use App\Models\Traits\SummaryKeyTrait;
  * use HnhDigital\HelperCollection\Traits\HasCompositePrimaryKey;
  * use Illuminate\Database\Eloquent\Concerns\HasAttributes as EloquentHasAttributes;
  *
- * class ... extends ...
+ * class Classname
  * {
  *     use EloquentHasAttributes, HasCompositePrimaryKey {
  *         EloquentHasAttributes::getAttribute as eloquentGetAttribute;
- *         Concerns\HasAttributes::getAttribute insteadof EloquentHasAttributes;
+ *         HasCompositePrimaryKey::getAttribute insteadof EloquentHasAttributes;
  *     }
+ *
+ *     use SummaryKeyTrait;
  * }
+ *
  * ```
+ *
+ * getAttribute is overridden as this method can be called and an exception thrown as $key is now array
+ * when been called with the $primaryKey.
+ *
  */
-
-use Illuminate\Database\Eloquent\Builder;
-
 trait HasCompositePrimaryKey
 {
     /**
@@ -67,23 +73,24 @@ trait HasCompositePrimaryKey
     }
 
     /**
-     * Get attribute override when primaryKey is composite.
+     * Get an attribute from the model.
      *
-     * @param  string  $key
+     * @param string $key
+     *
      * @return mixed
      */
-    public function getAttribute($keys)
+    public function getAttribute($key)
     {
-        if (! is_array($keys)) {
-            return $this->eloquentGetAttribute($keys);
+        if (is_array($key)) {
+            $attribute = [];
+
+            foreach ($key as $key_name) {
+                $attribute[] = $this->eloquentGetAttribute($key_name);
+            }
+
+            return implode('-', $attribute);
         }
 
-        $value = [];
-
-        foreach ($keys as $key) {
-            $value[] = $this->eloquentGetAttribute($key);
-        }
-
-        return implode(';', $value);
+        return $this->eloquentGetAttribute($key);
     }
 }
