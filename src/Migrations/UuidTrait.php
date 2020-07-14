@@ -1,6 +1,6 @@
 <?php
 
-namespace HnhDigital\HelperCollection;
+namespace HnhDigital\HelperCollection\Migrations;
 
 use DB;
 
