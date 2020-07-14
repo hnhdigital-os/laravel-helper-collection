@@ -10,16 +10,18 @@ use Illuminate\Database\Eloquent\Builder;
  * ```
  * use App\Models\Traits\SummaryKeyTrait;
  * use HnhDigital\HelperCollection\Traits\HasCompositePrimaryKey;
- * use Illuminate\Database\Eloquent\Concerns\HasAttributes as EloquentHasAttributes;
+ * use Illuminate\Database\Eloquent\Concerns\HasAttributes;
  *
  * class Classname
  * {
- *     use EloquentHasAttributes, HasCompositePrimaryKey {
- *         EloquentHasAttributes::getAttribute as eloquentGetAttribute;
- *         HasCompositePrimaryKey::getAttribute insteadof EloquentHasAttributes;
+ *     use HasAttributes, HasCompositePrimaryKey {
+ *         HasAttributes::getAttribute as eloquentGetAttribute;
+ *         HasCompositePrimaryKey::getAttribute insteadof HasAttributes;
  *     }
  *
  *     use SummaryKeyTrait;
+ *
+ *     protected static $mutatorCache = [];
  * }
  *
  * ```
