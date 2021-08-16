@@ -5,7 +5,7 @@ namespace HnhDigital\HelperCollection\Traits;
 use Illuminate\Database\Eloquent\Builder;
 
 /**
- * To use this trait, you must install it using:-
+ * To use this trait, you must install it using:-.
  *
  * ```
  * use App\Models\Traits\SummaryKeyTrait;
@@ -28,7 +28,6 @@ use Illuminate\Database\Eloquent\Builder;
  *
  * getAttribute is overridden as this method can be called and an exception thrown as $key is now array
  * when been called with the $primaryKey.
- *
  */
 trait HasCompositePrimaryKey
 {
