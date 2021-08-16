@@ -232,7 +232,7 @@ class ServiceProvider extends BaseServiceProvider
             }
 
             // @str_upper => strtoupper
-            blade::directive('str_upper', function ($text) use ($function_name) {
+            blade::directive('str_upper', function ($text) {
                 if (substr($text, 0, 1) !== '$') {
                     $text = "'$text'";
                 }
@@ -241,7 +241,7 @@ class ServiceProvider extends BaseServiceProvider
             });
 
             // @str_lower => strtolower
-            blade::directive('str_lower', function ($text) use ($function_name) {
+            blade::directive('str_lower', function ($text) {
                 if (substr($text, 0, 1) !== '$') {
                     $text = "'$text'";
                 }
