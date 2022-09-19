@@ -8,20 +8,21 @@ use Illuminate\Database\Eloquent\Builder;
  * To use this trait, you must install it using:-.
  *
  * ```
- * use App\Models\Traits\SummaryKeyTrait;
  * use HnhDigital\HelperCollection\Traits\HasCompositePrimaryKey;
  * use Illuminate\Database\Eloquent\Concerns\HasAttributes;
  *
  * class Classname
  * {
- *     use HasAttributes, HasCompositePrimaryKey {
+ *     use HasAttributes;
+ *     use HasCompositePrimaryKey {
  *         HasAttributes::getAttribute as eloquentGetAttribute;
  *         HasCompositePrimaryKey::getAttribute insteadof HasAttributes;
  *     }
  *
- *     use SummaryKeyTrait;
- *
  *     protected static $mutatorCache = [];
+ *     protected static $attributeMutatorCache = [];
+ *     protected static $getAttributeMutatorCache = [];
+ *     protected static $setAttributeMutatorCache = [];
  * }
  *
  * ```
@@ -34,9 +35,9 @@ trait HasCompositePrimaryKey
     /**
      * Set the keys for a save update query.
      *
-     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @param Builder $query
      *
-     * @return \Illuminate\Database\Eloquent\Builder
+     * @return Builder
      */
     protected function setKeysForSaveQuery($query)
     {

@@ -3,6 +3,7 @@
 namespace HnhDigital\HelperCollection\Traits;
 
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Builder;
 
 trait JobTrait
 {
@@ -10,10 +11,10 @@ trait JobTrait
      * Scope the task in the job.
      *
      * @param Builer $query
-     *
+     * @param string $task
      * @return void
      */
-    public function scopeTask($query, $task)
+    public function scopeTask(Builder $query, string $task): void
     {
         $query->whereRaw(sprintf(
             'payload->"$.data.command" LIKE \'%%%s%%\'',
@@ -28,7 +29,7 @@ trait JobTrait
      *
      * @return void
      */
-    public function scopeModel($query, $model, $key)
+    public function scopeModel(Builder $query, string $model, string $key): void
     {
         $query->whereRaw(sprintf(
             'payload->"$.data.command" LIKE \'%%id\\\\";s:36:\\\\"%s\\\\";%%\'',
@@ -41,13 +42,18 @@ trait JobTrait
      *
      * @param Builer $query
      * @param string $key
-     * @param string $value
+     * @param mixed $value
      * @param string $class_name
      * @param string $data_type
-     *
      * @return void
      */
-    public function scopeLookupKeyValue($query, $key, $value, $class_name = '', $data_type = 's')
+    public function scopeLookupKeyValue(
+        Builder $query,
+        string $key,
+        $value,
+        string $class_name = '',
+        string $data_type = 's'
+    ): void
     {
         // Lookup serialized array.
         if (is_array($value)) {
@@ -108,10 +114,9 @@ trait JobTrait
      * Get the available at value as Carbon.
      *
      * @param string $value
-     *
      * @return Carbon
      */
-    public function getAvailableAtAttribute($value)
+    public function getAvailableAtAttribute(string $value): Carbon
     {
         return Carbon::createFromTimestamp($value);
     }
@@ -120,10 +125,9 @@ trait JobTrait
      * Get the reserved at value as Carbon.
      *
      * @param string $value
-     *
      * @return Carbon
      */
-    public function getReservedAtAttribute($value)
+    public function getReservedAtAttribute(string $value): Carbon
     {
         return Carbon::createFromTimestamp($value);
     }
@@ -132,10 +136,9 @@ trait JobTrait
      * Get the created at value as Carbon.
      *
      * @param string $value
-     *
      * @return Carbon
      */
-    public function getCreatedAtAttribute($value)
+    public function getCreatedAtAttribute(string $value): Carbon
     {
         return Carbon::createFromTimestamp($value);
     }
@@ -144,9 +147,9 @@ trait JobTrait
      * Set available_at attribute.
      *
      * @param string $value
-     * @param $this
+     * @return self
      */
-    public function setAvailableAtAttribute($value)
+    public function setAvailableAtAttribute(string $value): self
     {
         $this->attributes['available_at'] = empty($value) ? 0 : $this->asDateTime($value)->timestamp;
 
@@ -157,10 +160,9 @@ trait JobTrait
      * Get the payload.
      *
      * @param string $value
-     *
      * @return string
      */
-    public function getPayloadAttribute($value)
+    public function getPayloadAttribute(string $value): string
     {
         $value = json_decode($value);
 
@@ -173,10 +175,9 @@ trait JobTrait
      * Encode a value.
      *
      * @param string $value
-     *
      * @return string
      */
-    public static function encodeQueryValue($value)
+    public static function encodeQueryValue(string $value): string
     {
         return str_replace('\\', '\\\\\\\\', $value);
     }
