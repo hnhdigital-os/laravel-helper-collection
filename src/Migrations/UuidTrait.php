@@ -9,9 +9,8 @@ trait UuidTrait
     /**
      * Create trigger.
      *
-     * @param string $table
-     * @param string $column
-     *
+     * @param  string  $table
+     * @param  string  $column
      * @return void
      */
     public function createUuidTrigger($table, $column)
@@ -29,9 +28,8 @@ trait UuidTrait
     /**
      * Drop trigger.
      *
-     * @param string $table
-     * @param string $column
-     *
+     * @param  string  $table
+     * @param  string  $column
      * @return void
      */
     public function dropUuidTrigger($table)

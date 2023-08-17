@@ -11,9 +11,8 @@ class VerifyCsrfToken extends ParentVerifyCsrfToken
     /**
      * Handle an incoming request.
      *
-     * @param \Illuminate\Http\Request $request
-     * @param \Closure                 $next
-     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Closure  $next
      * @return mixed
      */
     public function handle($request, Closure $next)
@@ -24,7 +23,7 @@ class VerifyCsrfToken extends ParentVerifyCsrfToken
             if ($request->ajax()) {
                 header('X-FORCE_FRONTEND_REDIRECT: 1');
                 echo Arr::get($_SERVER, 'HTTP_REFERER', Arr::get($_SERVER, 'HTTP_ORIGIN', secure_url('')));
-                exit();
+                exit;
             }
 
             return $next($request);

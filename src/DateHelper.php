@@ -10,10 +10,9 @@ class DateHelper
     /**
      * Generate the correct keys for the given type and date range.
      *
-     * @param string $type
-     * @param string|Carbon|CarbonImmutable $from_date
-     * @param null|string|Carbon|CarbonImmutable $to_date
-     *
+     * @param  string  $type
+     * @param  string|Carbon|CarbonImmutable  $from_date
+     * @param  null|string|Carbon|CarbonImmutable  $to_date
      * @return array
      */
     public static function generateKeys($type, $from_date, $to_date = null)
@@ -43,7 +42,7 @@ class DateHelper
                 }
                 break;
 
-            // Generate month keys.
+                // Generate month keys.
             case 'm':
                 while ($from_date->isBefore($to_date)) {
                     $result[] = $from_date->format('Y-m');
@@ -51,7 +50,7 @@ class DateHelper
                 }
                 break;
 
-            // Generate week keys.
+                // Generate week keys.
             case 'w':
                 while ($from_date->isBefore($to_date)) {
                     $result[] = $from_date->isoWeekYear().'-'.$from_date->isoWeek();
@@ -59,7 +58,7 @@ class DateHelper
                 }
                 break;
 
-            // Generate year keys.
+                // Generate year keys.
             case 'y':
                 while ($from_date->isBefore($to_date)) {
                     $result[] = $from_date->format('Y');
@@ -67,7 +66,7 @@ class DateHelper
                 }
                 break;
 
-            // Generate financial year keys.
+                // Generate financial year keys.
             case 'fy':
                 $from_fy = $from_date->year;
                 if ($from_date->month >= 1) {

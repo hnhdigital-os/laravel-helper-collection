@@ -26,10 +26,9 @@ class Color
     /**
      * Contrast the given RGB based color.
      *
-     * @param string $r
-     * @param string $g
-     * @param string $b
-     *
+     * @param  string  $r
+     * @param  string  $g
+     * @param  string  $b
      * @return array
      */
     public function contrastFromRGB($r, $g, $b)

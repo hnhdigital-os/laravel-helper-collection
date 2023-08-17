@@ -27,10 +27,9 @@ class Human
     /**
      * Convert bytes to a word.
      *
-     * @param int $bytes
-     * @param int $decimals
-     * @param int $mod
-     *
+     * @param  int  $bytes
+     * @param  int  $decimals
+     * @param  int  $mod
      * @return string
      */
     public function bytes($bytes, $decimals = 2, $mod = 1024)
@@ -47,8 +46,7 @@ class Human
     /**
      * Convert an integer timeset to pretty.
      *
-     * @param int $offset
-     *
+     * @param  int  $offset
      * @return string
      */
     public function timeOffset($offset)
@@ -62,9 +60,8 @@ class Human
     /**
      * Convert seconds to words.
      *
-     * @param int   $seconds
-     * @param array $options
-     *
+     * @param  int  $seconds
+     * @param  array  $options
      * @return string
      */
     public function seconds($seconds, $options = [])
@@ -120,10 +117,9 @@ class Human
     /**
      * Truncate a string.
      *
-     * @param string $long_text
-     * @param int    $length
-     * @param array  $options
-     *
+     * @param  string  $long_text
+     * @param  int  $length
+     * @param  array  $options
      * @return string
      */
     public function truncate($long_text, $length, $options = [])
@@ -150,8 +146,7 @@ class Human
     /**
      * File upload error codes for humans.
      *
-     * @param int $code
-     *
+     * @param  int  $code
      * @return string
      */
     public static function getFileUploadErrorMessage($code)
@@ -163,7 +158,7 @@ class Human
             case UPLOAD_ERR_PARTIAL:
                 return 'The uploaded file was only partially uploaded';
             case UPLOAD_ERR_NO_FILE:
-               return 'No file was uploaded';
+                return 'No file was uploaded';
             case UPLOAD_ERR_NO_TMP_DIR:
             case UPLOAD_ERR_CANT_WRITE:
             case UPLOAD_ERR_EXTENSION:

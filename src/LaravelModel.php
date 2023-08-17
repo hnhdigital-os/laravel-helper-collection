@@ -9,8 +9,7 @@ class LaravelModel
     /**
      * Get the table keys based on the relation.
      *
-     * @param Relation $relation
-     *
+     * @param  Relation  $relation
      * @return array
      */
     private function getModelRelation($relation)
@@ -34,15 +33,15 @@ class LaravelModel
             case 'BelongsToMany':
                 $parent_key = $relation->getQualifiedForeignKey();
                 $foreign_key = $relation->getQualifiedOwnerKeyName();
-            break;
+                break;
             case 'HasMany':
                 $parent_key = $relation->getQualifiedParentKeyName();
                 $foreign_key = $relation->getQualifiedForeignKeyName();
-            break;
+                break;
             case 'HasOne':
                 $parent_key = $table.'.'.$relation->getParentKey();
                 $foreign_key = $table.'.'.$relation->getForeignKeyName();
-            break;
+                break;
         }
 
         return [
@@ -57,11 +56,10 @@ class LaravelModel
     /**
      * This determines the foreign key relations automatically to prevent the need to figure out the columns.
      *
-     * @param string $relation_name
-     * @param string $operator
-     * @param string $type
-     * @param bool   $where
-     *
+     * @param  string  $relation_name
+     * @param  string  $operator
+     * @param  string  $type
+     * @param  bool  $where
      * @return Builder
      *
      * @SuppressWarnings(PHPMD.BooleanArgumentFlag)

@@ -22,7 +22,7 @@ class MacroServiceProvider extends ServiceProvider
                 $file_last_modified = filemtime($file_path);
                 if ($file_last_modified == $cache_last_modified) {
                     header('HTTP/1.1 304 Not Modified');
-                    exit();
+                    exit;
                 }
             }
 

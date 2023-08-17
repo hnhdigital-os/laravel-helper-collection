@@ -10,8 +10,8 @@ trait JobTrait
     /**
      * Scope the task in the job.
      *
-     * @param Builer $query
-     * @param string $task
+     * @param  Builer  $query
+     * @param  string  $task
      * @return void
      */
     public function scopeTask(Builder $query, string $task): void
@@ -25,8 +25,7 @@ trait JobTrait
     /**
      * Scope the model in the job.
      *
-     * @param Builer $query
-     *
+     * @param  Builer  $query
      * @return void
      */
     public function scopeModel(Builder $query, string $model, string $key): void
@@ -40,11 +39,11 @@ trait JobTrait
     /**
      * Scope a given key value.
      *
-     * @param Builer $query
-     * @param string $key
-     * @param mixed $value
-     * @param string $class_name
-     * @param string $data_type
+     * @param  Builer  $query
+     * @param  string  $key
+     * @param  mixed  $value
+     * @param  string  $class_name
+     * @param  string  $data_type
      * @return void
      */
     public function scopeLookupKeyValue(
@@ -53,8 +52,7 @@ trait JobTrait
         $value,
         string $class_name = '',
         string $data_type = 's'
-    ): void
-    {
+    ): void {
         // Lookup serialized array.
         if (is_array($value)) {
             $value = serialize($value);
@@ -113,7 +111,7 @@ trait JobTrait
     /**
      * Get the available at value as Carbon.
      *
-     * @param string $value
+     * @param  string  $value
      * @return Carbon
      */
     public function getAvailableAtAttribute(string $value): Carbon
@@ -124,7 +122,7 @@ trait JobTrait
     /**
      * Get the reserved at value as Carbon.
      *
-     * @param string $value
+     * @param  string  $value
      * @return Carbon
      */
     public function getReservedAtAttribute(string $value): Carbon
@@ -135,7 +133,7 @@ trait JobTrait
     /**
      * Get the created at value as Carbon.
      *
-     * @param string $value
+     * @param  string  $value
      * @return Carbon
      */
     public function getCreatedAtAttribute(string $value): Carbon
@@ -146,7 +144,7 @@ trait JobTrait
     /**
      * Set available_at attribute.
      *
-     * @param string $value
+     * @param  string  $value
      * @return self
      */
     public function setAvailableAtAttribute(string $value): self
@@ -159,7 +157,7 @@ trait JobTrait
     /**
      * Get the payload.
      *
-     * @param string $value
+     * @param  string  $value
      * @return string
      */
     public function getPayloadAttribute(string $value): string
@@ -174,7 +172,7 @@ trait JobTrait
     /**
      * Encode a value.
      *
-     * @param string $value
+     * @param  string  $value
      * @return string
      */
     public static function encodeQueryValue(string $value): string

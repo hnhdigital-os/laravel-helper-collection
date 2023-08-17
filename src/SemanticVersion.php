@@ -9,8 +9,7 @@ class SemanticVersion
     /**
      * Convert a semantic version string to a number.
      *
-     * @param string $value
-     *
+     * @param  string  $value
      * @return array
      */
     public static function toNumber($value)
