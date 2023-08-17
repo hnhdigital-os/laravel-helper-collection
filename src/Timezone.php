@@ -29,8 +29,7 @@ class Timezone
     /**
      * Returns a region grouped array.
      *
-     * @param array $config
-     *
+     * @param  array  $config
      * @return array
      */
     public static function data($config = [])
@@ -39,7 +38,6 @@ class Timezone
             $zones = DateTimeZone::listIdentifiers($mask);
 
             foreach ($zones as $timezone) {
-
                 // Time at this timezone.
                 $time = Carbon::now($timezone);
 
@@ -80,8 +78,7 @@ class Timezone
     /**
      * Return a flat array.
      *
-     * @param array $config
-     *
+     * @param  array  $config
      * @return array
      */
     public static function optionsArray($config = [])

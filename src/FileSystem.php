@@ -7,8 +7,7 @@ class FileSystem
     /**
      * Enclose the provided string with slashes.
      *
-     * @param string $path
-     *
+     * @param  string  $path
      * @return string
      */
     public function enclosePath($path)

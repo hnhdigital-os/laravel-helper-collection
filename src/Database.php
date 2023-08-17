@@ -41,8 +41,7 @@ class Database
     /**
      * Convert the interval string to the mysql constant.
      *
-     * @param string $interval
-     *
+     * @param  string  $interval
      * @return string
      */
     public function convertInterval($interval)

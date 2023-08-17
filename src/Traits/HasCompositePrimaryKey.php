@@ -35,8 +35,7 @@ trait HasCompositePrimaryKey
     /**
      * Set the keys for a save update query.
      *
-     * @param Builder $query
-     *
+     * @param  Builder  $query
      * @return Builder
      */
     protected function setKeysForSaveQuery($query)
@@ -57,8 +56,7 @@ trait HasCompositePrimaryKey
     /**
      * Get the primary key value for a save query.
      *
-     * @param mixed $keyName
-     *
+     * @param  mixed  $keyName
      * @return mixed
      */
     protected function getKeyForSaveQuery($keyName = null)
@@ -77,8 +75,7 @@ trait HasCompositePrimaryKey
     /**
      * Get an attribute from the model.
      *
-     * @param string $key
-     *
+     * @param  string  $key
      * @return mixed
      */
     public function getAttribute($key)
